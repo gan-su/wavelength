@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact · Serfis</title>
+  <meta name="description" content="Get in touch with Serfis about testing the content engine with your catalog, partnerships, or general questions.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500;600&family=Geist:wght@400;500&display=swap">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="wordmark" href="index.html">Serfis</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html" aria-current="page">Contact</a></li>
+    </ul>
+    <a class="btn btn-primary" href="contact.html">Get in touch</a>
+  </div>
+</header>
+
+<main>
+  <section class="page-head" style="padding-bottom:56px">
+    <div class="wrap">
+      <h1>Get in touch</h1>
+      <p class="lede">Tell us about your brand and how you produce content today.</p>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap split" style="--split-left:400px">
+      <div class="contact-email">
+        <span class="label">Email</span>
+        <a href="mailto:hello@serfis.ai">hello@serfis.ai</a>
+        <p class="small">For partnerships, testing the engine with your catalog, or general questions.</p>
+      </div>
+
+      <!-- No backend yet: the form opens the visitor's mail client with the message pre-filled. -->
+      <form class="form" action="mailto:hello@serfis.ai" method="get" enctype="text/plain">
+        <div class="form-row">
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" placeholder="Your name" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="email">Work email</label>
+            <input id="email" name="email" type="email" placeholder="you@company.com" autocomplete="email" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="company">Company</label>
+          <input id="company" name="company" type="text" placeholder="Your store or brand" autocomplete="organization">
+        </div>
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="body" placeholder="What are you selling, and how do you produce content today?" required></textarea>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-primary" type="submit">Send message</button>
+          <p>We will reply by email.</p>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="wordmark" href="index.html">Serfis</a>
+        <p>AI-powered workflows that automate marketing and customer engagement for businesses that sell physical products.</p>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col">
+          <span>Site</span>
+          <a href="index.html">Home</a>
+          <a href="services.html">Services</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="foot-col">
+          <span>Company</span>
+          <a href="mailto:hello@serfis.ai">hello@serfis.ai</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">© 2026 Serfis</div>
+  </div>
+</footer>
+
+</body>
+</html>
