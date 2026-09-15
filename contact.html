@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact · Serfis</title>
+  <meta name="description" content="Tell Serfis about your company so we can help you build brand awareness with AI-generated video ads.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500;600&family=Geist:wght@400;500&display=swap">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="wordmark" href="index.html">Serfis</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html" aria-current="page">Contact</a></li>
+    </ul>
+    <a class="btn btn-primary" href="contact.html">Get in touch</a>
+  </div>
+</header>
+
+<main>
+  <section class="page-head" style="padding-bottom:56px">
+    <div class="wrap">
+      <h1>Get in touch</h1>
+      <p class="lede">Tell us about your company so we can help you build brand awareness with AI-generated video ads.</p>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap split" style="--split-left:400px">
+      <div class="contact-email">
+        <span class="label">Email</span>
+        <a href="mailto:hello@serfis.ai">hello@serfis.ai</a>
+        <p class="small">For partnerships, early access to the video engine, or general questions.</p>
+      </div>
+
+      <!-- No backend yet: submitting opens the visitor's mail client with the message pre-filled. -->
+      <form id="contact-form" class="form" novalidate>
+        <div class="form-row">
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" placeholder="Your name" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="email">Work email</label>
+            <input id="email" name="email" type="email" placeholder="you@company.com" autocomplete="email" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="company">Company</label>
+            <input id="company" name="company" type="text" placeholder="Your company's name" autocomplete="organization" required>
+          </div>
+          <div class="field">
+            <label for="companyUrl">Company URL</label>
+            <input id="companyUrl" name="companyUrl" type="url" placeholder="https://" autocomplete="url" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="industry">Industry</label>
+            <select id="industry" name="industry" required>
+              <option value="" disabled selected>Select your industry</option>
+              <option>Software / SaaS</option>
+              <option>Fintech</option>
+              <option>Healthcare / biotech</option>
+              <option>E-commerce / retail</option>
+              <option>Consumer apps</option>
+              <option>Developer tools / infrastructure</option>
+              <option>AI / machine learning</option>
+              <option>Hardware / robotics</option>
+              <option>Climate / energy</option>
+              <option>Education</option>
+              <option>Media / entertainment</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="stage">Company stage</label>
+            <select id="stage" name="stage" required>
+              <option value="" disabled selected>Select your stage</option>
+              <option>Pre-Seed</option>
+              <option>Seed</option>
+              <option>Series A+</option>
+              <option>Bootstrapped</option>
+              <option>Established</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="sells">What does your company sell?</label>
+            <select id="sells" name="sells" required>
+              <option value="" disabled selected>Select an option</option>
+              <option>Physical products</option>
+              <option>Digital products</option>
+              <option>SaaS</option>
+              <option>Services</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="phone">Phone # <span class="optional">(optional)</span></label>
+            <input id="phone" name="phone" type="tel" placeholder="(555) 555-5555" autocomplete="tel">
+          </div>
+        </div>
+        <div class="field">
+          <label for="help">What are you hoping Serfis helps with?</label>
+          <textarea id="help" name="help" placeholder="Tell us about your brand and what you're building." required></textarea>
+        </div>
+        <div class="field">
+          <label for="source">Where did you hear about Serfis? <span class="optional">(optional)</span></label>
+          <input id="source" name="source" type="text" placeholder="e.g. a search engine, a friend, social media">
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-primary" type="submit">Send message</button>
+          <p>We will reply by email.</p>
+        </div>
+      </form>
+
+      <div id="confirm-panel" class="form confirm" hidden>
+        <svg class="confirm-icon" width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <circle cx="24" cy="24" r="23" stroke="currentColor" stroke-width="2"/>
+          <path d="M15 24.5L21 30.5L33 17.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h2>Message sent</h2>
+        <p class="body">Thanks for reaching out. Your email client should have opened with your message ready to send. If it did not open, email us directly at <a href="mailto:hello@serfis.ai">hello@serfis.ai</a> and we will reply from there.</p>
+        <button type="button" id="send-another" class="btn btn-secondary">Send another message</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="wordmark" href="index.html">Serfis</a>
+        <p>Serfis creates AI-generated video ads that help funded startups build brand awareness.</p>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col">
+          <span>Site</span>
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="foot-col">
+          <span>Company</span>
+          <a href="mailto:hello@serfis.ai">hello@serfis.ai</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">© 2026 Serfis</div>
+  </div>
+</footer>
+
+<script src="contact.js" defer></script>
+</body>
+</html>
