@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wavelength - ad placements for startups</title>
+<meta name="description" content="Wavelength sells newsletter, directory and event placements to startups that need the right readers: founders, operators and early-stage investors.">
+<meta name="color-scheme" content="dark">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Wavelength - ad placements for startups">
+<meta property="og:description" content="Put your startup where investors already look.">
+
+<script>document.documentElement.classList.add('js');</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter+Tight:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+<!-- ============ BOOT SEQUENCE ============ -->
+<div class="boot" id="boot" aria-hidden="true">
+  <div class="boot__inner">
+    <ul class="boot__lines">
+      <li class="boot__line" data-boot="0">INITIALIZING PLATFORM</li>
+      <li class="boot__line" data-boot="1">LOADING STARTUP NETWORK</li>
+      <li class="boot__line" data-boot="2">CONNECTING ADVERTISERS</li>
+    </ul>
+    <div class="boot__meter"><span class="boot__fill" id="bootFill"></span></div>
+    <div class="boot__pct" id="bootPct">000</div>
+  </div>
+</div>
+
+<!-- ============ HUD READOUT ============ -->
+<aside class="hud" id="hud" aria-hidden="true">
+  <span class="hud__row"><i class="hud__led"></i>SIGNAL LIVE</span>
+  <span class="hud__row">POS <b id="hudX">0000</b>.<b id="hudY">0000</b></span>
+  <span class="hud__row">DEPTH <b id="hudDepth">000</b>%</span>
+  <span class="hud__row">VIEW <b id="hudView">0000</b></span>
+</aside>
+
+<div class="grain" aria-hidden="true"></div>
+<div class="progress" aria-hidden="true"><span class="progress__fill" id="progressFill"></span></div>
+
+<!-- ============ NAV ============ -->
+<header class="nav">
+ <div class="nav__inner">
+  <a class="nav__brand" href="#top" aria-label="Wavelength home">
+    <svg class="nav__mark" viewBox="0 0 28 28" aria-hidden="true">
+      <rect x="1" y="1" width="26" height="26" rx="7" fill="none" stroke="currentColor" stroke-width="1.2" opacity=".45"/>
+      <path d="M6 14c2.4 0 2.4-6.2 4.7-6.2S13.1 20.2 15.5 20.2 17.9 14 20.3 14H22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    </svg>
+    <span>Wavelength</span>
+  </a>
+  <nav class="nav__links" aria-label="Primary">
+    <a href="#audience">Reach</a>
+    <a href="#placements">Placements</a>
+    <a href="#how">How it works</a>
+    <a href="#pricing">Pricing</a>
+  </nav>
+  <a class="btn btn--primary btn--sm" href="#pricing">Get featured <i class="ph ph-arrow-up-right" aria-hidden="true"></i></a>
+ </div>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="hero">
+  <div class="hero__stage">
+    <div class="hero__schematic" aria-hidden="true">
+      <svg viewBox="0 0 1200 760" preserveAspectRatio="xMidYMid slice" class="sch">
+        <defs>
+          <radialGradient id="bloom" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#7C3AED" stop-opacity=".40"/>
+            <stop offset="55%" stop-color="#4C1D95" stop-opacity=".12"/>
+            <stop offset="100%" stop-color="#4C1D95" stop-opacity="0"/>
+          </radialGradient>
+          <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+            <path d="M48 0H0v48" fill="none" stroke="#8B5CF6" stroke-opacity=".085" stroke-width="1"/>
+          </pattern>
+        </defs>
+
+        <rect width="1200" height="760" fill="url(#grid)"/>
+        <ellipse cx="600" cy="380" rx="430" ry="330" fill="url(#bloom)"/>
+
+        <!-- concentric reach rings -->
+        <g class="sch__rings" fill="none" stroke="#A78BFA" stroke-opacity=".5">
+          <circle class="sch__draw" cx="600" cy="380" r="96" stroke-dasharray="604" stroke-dashoffset="604"/>
+          <circle class="sch__draw" cx="600" cy="380" r="176" stroke-dasharray="1106" stroke-dashoffset="1106" stroke-opacity=".62"/>
+          <circle class="sch__draw" cx="600" cy="380" r="262" stroke-dasharray="1647" stroke-dashoffset="1647" stroke-opacity=".38"/>
+          <circle class="sch__draw" cx="600" cy="380" r="348" stroke-dasharray="2187" stroke-dashoffset="2187" stroke-opacity=".22"/>
+        </g>
+
+        <!-- radial ticks -->
+        <g class="sch__ticks" stroke="#C4B5FD" stroke-opacity=".34" stroke-width="1">
+          <path d="M600 18v26M600 716v26M182 380h26M992 380h26"/>
+          <path d="M306 86l18 18M894 674l-18-18M894 86l-18 18M306 674l18-18"/>
+        </g>
+
+        <!-- callout linework -->
+        <g class="sch__callouts" fill="none" stroke="#C4B5FD" stroke-opacity=".42" stroke-width="1">
+          <path class="sch__draw" d="M600 204v-62h214" stroke-dasharray="276" stroke-dashoffset="276"/>
+          <path class="sch__draw" d="M424 380H236v104" stroke-dasharray="292" stroke-dashoffset="292"/>
+          <path class="sch__draw" d="M776 466l120 96h132" stroke-dasharray="286" stroke-dashoffset="286"/>
+        </g>
+        <g class="sch__labels" font-family="'IBM Plex Mono', monospace" font-size="11" fill="#C4B5FD" fill-opacity=".62" letter-spacing="1.4">
+          <text x="822" y="138">CORE READERSHIP</text>
+          <text x="236" y="502">R1 / NEWSLETTER</text>
+          <text x="1036" y="566">R3 / EVENT FLOOR</text>
+        </g>
+
+        <!-- dimension line -->
+        <g class="sch__dim" stroke="#A78BFA" stroke-opacity=".3" stroke-width="1" fill="none">
+          <path d="M252 700h696M252 692v16M948 692v16"/>
+        </g>
+        <text x="600" y="726" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="10.5" fill="#C4B5FD" fill-opacity=".5" letter-spacing="1.6">TOTAL ADDRESSABLE ATTENTION</text>
+
+        <!-- nodes -->
+        <g class="sch__nodes" fill="#C4B5FD">
+          <circle cx="600" cy="204" r="3.2"/><circle cx="424" cy="380" r="3.2"/>
+          <circle cx="776" cy="466" r="3.2"/><circle cx="600" cy="380" r="4.6" fill="#8B5CF6"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="hero__content">
+      <!-- narrative beats: revealed sequentially on scroll -->
+      <div class="hero__narrative" aria-hidden="true">
+        <p class="beat" data-beat="0">You can buy ten million impressions tomorrow.</p>
+        <p class="beat" data-beat="1">None of them will come from a partner at a seed fund.</p>
+        <p class="beat" data-beat="2">Wavelength sells the other kind of attention.</p>
+      </div>
+
+      <div class="hero__reveal" data-beat="3">
+        <h1 class="hero__h1">Put your startup where investors already look.</h1>
+        <p class="hero__sub">We place startups inside the newsletters, directories and events that founders, operators and early-stage investors actually read.</p>
+        <div class="hero__cta">
+          <a class="btn btn--primary" href="#pricing">Get featured <i class="ph ph-arrow-up-right" aria-hidden="true"></i></a>
+          <a class="btn btn--ghost" href="#placements">See placements</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero__rail" aria-hidden="true">
+      <span class="hero__rail-fill" id="heroRail"></span>
+    </div>
+  </div>
+  <div class="hero__track" aria-hidden="true">
+    <div class="hero__beat" data-sentinel="0"></div>
+    <div class="hero__beat" data-sentinel="1"></div>
+    <div class="hero__beat" data-sentinel="2"></div>
+    <div class="hero__beat" data-sentinel="3"></div>
+  </div>
+</section>
+
+<!-- ============ STATS BAND ============ -->
+<!-- PLACEHOLDER METRICS: replace all four figures with real analytics before launch -->
+<section class="stats reveal" aria-label="Network reach">
+  <div class="stats__grid">
+    <div class="stat">
+      <b class="stat__num" data-count="184200" data-format="int">184,200</b>
+      <span class="stat__label">monthly readers across the network</span>
+    </div>
+    <div class="stat">
+      <b class="stat__num" data-count="3.1" data-format="dec">3.1%</b>
+      <span class="stat__label">median click-through on featured slots</span>
+    </div>
+    <div class="stat">
+      <b class="stat__num" data-count="1940" data-format="int">1,940</b>
+      <span class="stat__label">investors subscribed, seed through Series B</span>
+    </div>
+    <div class="stat">
+      <b class="stat__num" data-count="41" data-format="int">41</b>
+      <span class="stat__label">startups placed in the last quarter</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AUDIENCE ============ -->
+<section class="section audience" id="audience">
+  <div class="wrap audience__grid">
+    <div class="audience__copy reveal">
+      <span class="eyebrow">Who is on the other side</span>
+      <h2 class="h2">Our readers write checks, sign contracts and ship integrations.</h2>
+      <p class="lede">Most ad networks sell you volume and let you sort out who saw it. We publish the composition of every list, because a narrow room of the right people beats a stadium.</p>
+      <ul class="persona">
+        <li class="persona__row">
+          <b class="persona__pct">38%</b>
+          <div>
+            <b class="persona__name">Founders and operators</b>
+            <p>Seed to Series B teams evaluating tools, agencies and infrastructure for the next two quarters.</p>
+          </div>
+        </li>
+        <li class="persona__row">
+          <b class="persona__pct">26%</b>
+          <div>
+            <b class="persona__name">Investors and scouts</b>
+            <p>Angels, seed partners and platform teams reading for deal flow before it reaches a pitch deck.</p>
+          </div>
+        </li>
+        <li class="persona__row">
+          <b class="persona__pct">22%</b>
+          <div>
+            <b class="persona__name">Engineers and product leads</b>
+            <p>The people who run the trial, file the security review and decide whether you get renewed.</p>
+          </div>
+        </li>
+        <li class="persona__row">
+          <b class="persona__pct">14%</b>
+          <div>
+            <b class="persona__name">Press and community</b>
+            <p>Writers and organisers who pick up what is already circulating in the founder channels.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <figure class="chart reveal" aria-label="Reader composition by role">
+      <figcaption class="chart__cap">Reader composition, rolling 90 days</figcaption>
+      <!-- bars are scaled against a 40% ceiling; values are labelled directly
+           on each column, so no redundant value axis is drawn -->
+      <div class="chart__plot">
+        <div class="chart__bar" style="--h:95%"><span>38%</span><i>Founders</i></div>
+        <div class="chart__bar" style="--h:65%"><span>26%</span><i>Investors</i></div>
+        <div class="chart__bar" style="--h:55%"><span>22%</span><i>Technical</i></div>
+        <div class="chart__bar" style="--h:35%"><span>14%</span><i>Press</i></div>
+      </div>
+      <p class="chart__foot">Share of total readers by primary role.</p>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ PLACEMENTS (bento, 4 cells for 4 items) ============ -->
+<section class="section placements" id="placements">
+  <div class="wrap">
+    <h2 class="h2 reveal">Four ways to show up.</h2>
+    <div class="bento">
+      <article class="cell cell--lead reveal">
+        <div class="cell__media">
+          <img src="https://picsum.photos/seed/wavelength-newsletter-slot/960/540" alt="Example creative running in the newsletter feature slot" loading="lazy" onerror="this.closest('.cell__media').classList.add('is-empty')" width="960" height="540">
+        </div>
+        <div class="cell__body">
+          <h3 class="cell__title">Newsletter feature</h3>
+          <p>A full block above the fold of the Thursday send: headline, two sentences, your creative and a tracked link. One per issue, never stacked against a competitor.</p>
+        </div>
+      </article>
+
+      <article class="cell cell--tint reveal">
+        <div class="cell__body">
+          <h3 class="cell__title">Directory listing</h3>
+          <p>A permanent, indexed page in the startup directory with your category, stage and hiring status. It keeps working after the campaign ends.</p>
+        </div>
+        <div class="cell__diagram" aria-hidden="true">
+          <svg viewBox="0 0 320 120" fill="none" stroke="#C4B5FD" stroke-opacity=".5">
+            <path d="M16 96h288" stroke-opacity=".25"/>
+            <rect x="16" y="24" width="76" height="56" rx="4"/>
+            <rect x="108" y="40" width="76" height="40" rx="4" stroke-opacity=".34"/>
+            <rect x="200" y="52" width="76" height="28" rx="4" stroke-opacity=".22"/>
+            <path d="M54 24V8h230" stroke-opacity=".3" stroke-dasharray="3 4"/>
+            <text x="290" y="12" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#C4B5FD" fill-opacity=".55" text-anchor="end" letter-spacing="1.2">RANK 01</text>
+          </svg>
+        </div>
+      </article>
+
+      <article class="cell reveal">
+        <div class="cell__media cell__media--short">
+          <img src="https://picsum.photos/seed/wavelength-banner-slot/640/360" alt="Example banner creative in the site header slot" loading="lazy" onerror="this.closest('.cell__media').classList.add('is-empty')" width="640" height="360">
+        </div>
+        <div class="cell__body">
+          <h3 class="cell__title">Site banner</h3>
+          <p>Rotating header placement across every article and directory page. Sold by impression block, capped at three advertisers.</p>
+        </div>
+      </article>
+
+      <article class="cell cell--wide reveal">
+        <div class="cell__body">
+          <h3 class="cell__title">Event sponsorship</h3>
+          <p>Your name on the monthly founder dinner and the demo night that follows it: logo on the run of show, ninety seconds on the floor, and the attendee list with opt-in contacts.</p>
+        </div>
+        <div class="cell__media cell__media--wide">
+          <img src="https://picsum.photos/seed/wavelength-founder-dinner/1200/420" alt="Founder dinner and demo night sponsorship placement" loading="lazy" onerror="this.closest('.cell__media').classList.add('is-empty')" width="1200" height="420">
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS (schematic rail) ============ -->
+<section class="section how" id="how">
+  <div class="wrap">
+    <h2 class="h2 reveal">From brief to live in four working days.</h2>
+    <ol class="rail">
+      <li class="rail__step reveal">
+        <span class="rail__node" aria-hidden="true"></span>
+        <h3 class="rail__title">Tell us who you need</h3>
+        <p>Send the company, the stage and the one person you want reading it. We come back with the lists that match and the ones that do not.</p>
+      </li>
+      <li class="rail__step reveal">
+        <span class="rail__node" aria-hidden="true"></span>
+        <h3 class="rail__title">Pick the slot</h3>
+        <p>Choose a placement and a date from live inventory. Nothing is oversold: if the week is taken, it shows as taken.</p>
+      </li>
+      <li class="rail__step reveal">
+        <span class="rail__node" aria-hidden="true"></span>
+        <h3 class="rail__title">Send the creative</h3>
+        <p>Upload art and copy, or hand us a link and let our editor draft it. You approve the exact text that ships.</p>
+      </li>
+      <li class="rail__step reveal">
+        <span class="rail__node" aria-hidden="true"></span>
+        <h3 class="rail__title">Go live and read the numbers</h3>
+        <p>Opens, clicks and directory visits land in a shared dashboard the morning after the send, with the raw log on request.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<!-- PLACEHOLDER PRICING: confirm real rate card before publishing -->
+<section class="section pricing" id="pricing">
+  <div class="wrap">
+    <div class="pricing__head reveal">
+      <h2 class="h2">Rate card</h2>
+      <p class="lede">Every price below is the price. No auction, no minimum spend, no annual contract to unlock a reasonable rate.</p>
+    </div>
+
+    <div class="tiers">
+      <article class="tier reveal">
+        <h3 class="tier__name">Banner</h3>
+        <p class="tier__price"><b>$480</b><span>per 25,000 impressions</span></p>
+        <p class="tier__for">For teams testing whether this audience responds at all.</p>
+        <ul class="tier__list">
+          <li><i class="ph ph-check" aria-hidden="true"></i>Rotating header across the site</li>
+          <li><i class="ph ph-check" aria-hidden="true"></i>Three advertisers maximum per block</li>
+          <li><i class="ph ph-check" aria-hidden="true"></i>Click and impression reporting</li>
+          <li><i class="ph ph-check" aria-hidden="true"></i>Creative swap once mid-flight</li>
+        </ul>
+        <a class="btn btn--ghost btn--full" href="#contact">Get featured</a>
+      </article>
+
+      <article class="tier tier--lead reveal">
+        <span class="tier__flag">Most booked</span>
+        <h3 class="tier__name">Featured listing</h3>
+        <p class="tier__price"><b>$1,250</b><span>per month</span></p>
+        <p class="tier__for">For startups that need a durable page plus a spike of traffic.</p>
+        <ul class="tier__list">
+          <li><i class="ph ph-check" aria-hidden="true"></i>Top of category in the directory</li>
+          <li><i class="ph ph-check" aria-hidden="true"></i>One newsletter feature block</li>
+          <li><i class="ph ph-check" aria-hidden="true"></i>Founder quote and hiring callout</li>
+          <li><i class="ph ph-check" aria-hidden="true"></i>Editor writes the copy if you want</li>
+          <li><i class="ph ph-check" aria-hidden="true"></i>Dashboard with referrer breakdown</li>
+        </ul>
+        <a class="btn btn--primary btn--full" href="#contact">Get featured <i class="ph ph-arrow-up-right" aria-hidden="true"></i></a>
+      </article>
+
+      <article class="tier reveal">
+        <h3 class="tier__name">Newsletter sponsorship</h3>
+        <p class="tier__price"><b>$2,100</b><span>per issue</span></p>
+        <p class="tier__for">For a launch, a raise or a hiring push with one date attached.</p>
+        <ul class="tier__list">
+          <li><i class="ph ph-check" aria-hidden="true"></i>Sole sponsor of the Thursday send</li>
+          <li><i class="ph ph-check" aria-hidden="true"></i>Above the fold, before editorial</li>
+          <li><i class="ph ph-check" aria-hidden="true"></i>Dedicated tracked link and UTM set</li>
+          <li><i class="ph ph-check" aria-hidden="true"></i>Post-send open and click export</li>
+        </ul>
+        <a class="btn btn--ghost btn--full" href="#contact">Get featured</a>
+      </article>
+    </div>
+
+    <div class="pricing__note reveal">
+      <p><b>Booking three or more sends?</b> Quarterly packages run about 20% under the single-issue rate and lock your slot before it goes public. Event sponsorship is quoted per night.</p>
+      <a class="link" href="#contact">Ask for a quarterly quote <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SOCIAL PROOF ============ -->
+<!-- PLACEHOLDER: invented companies and quotes. Swap for real, permissioned logos and testimonials. -->
+<section class="section proof" id="proof">
+  <div class="wrap">
+    <p class="proof__kicker reveal">Startups placed this year</p>
+  </div>
+  <div class="marquee" aria-label="Startups that have advertised with Wavelength">
+    <div class="marquee__track">
+      <span class="logo"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="10" fill="none" stroke="currentColor" stroke-width="1.3" opacity=".5"/><path d="M12 26l8-14 8 14z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>Tessellate</span>
+      <span class="logo"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="17" fill="none" stroke="currentColor" stroke-width="1.3" opacity=".5"/><path d="M13 25V15l14 10V15" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>Northbound</span>
+      <span class="logo"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="3" y="3" width="34" height="34" rx="4" fill="none" stroke="currentColor" stroke-width="1.3" opacity=".5"/><path d="M12 14h16M12 20h10M12 26h14" stroke="currentColor" stroke-width="1.7"/></svg>Halcyon Data</span>
+      <span class="logo"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 4l14 8v16l-14 8-14-8V12z" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="20" cy="20" r="4" fill="currentColor" opacity=".7"/></svg>Sable Robotics</span>
+      <span class="logo"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="16" fill="none" stroke="currentColor" stroke-width="1.3" opacity=".5"/><path d="M8 20a12 7 0 0024 0a12 7 0 00-24 0" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Orbital Bay</span>
+      <span class="logo"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M6 30L20 8l14 22z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M13 30l7-11 7 11" fill="none" stroke="currentColor" stroke-width="1.2" opacity=".6"/></svg>Quarry</span>
+      <span class="logo"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="4" y="4" width="32" height="32" rx="16" fill="none" stroke="currentColor" stroke-width="1.3" opacity=".5"/><path d="M14 20h12M20 14v12" stroke="currentColor" stroke-width="1.7"/></svg>Pinecrest</span>
+      <span class="logo"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M8 28V12l12 8 12-8v16" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Fernweh</span>
+    </div>
+  </div>
+
+  <div class="wrap quotes">
+    <figure class="quote reveal">
+      <blockquote>Three of the five intro calls after our raise traced back to one Thursday send. That is not a channel, that is a shortcut.</blockquote>
+      <figcaption><b>Priya Raghunathan</b>Co-founder, Tessellate</figcaption>
+    </figure>
+    <figure class="quote reveal">
+      <blockquote>We spent four months on paid social for the same number of qualified demos we got from one directory listing.</blockquote>
+      <figcaption><b>Marcus Oyelaran</b>Head of growth, Northbound</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="section faq" id="faq">
+  <div class="wrap faq__grid">
+    <h2 class="h2 reveal">Questions we get before the first booking.</h2>
+    <div class="faq__list reveal">
+      <details class="qa">
+        <summary>How fast can a campaign go live?<span class="qa__mark" aria-hidden="true"></span></summary>
+        <p>Four working days from signed brief to publish, assuming creative is ready. Newsletter slots run on the Thursday cycle, so a Monday brief makes that week.</p>
+      </details>
+      <details class="qa">
+        <summary>Do you work with pre-revenue startups?<span class="qa__mark" aria-hidden="true"></span></summary>
+        <p>Yes. Directory listings and banner blocks are priced for teams before a Series A. If the fit is wrong for your stage we will say so rather than sell you a slot.</p>
+      </details>
+      <details class="qa">
+        <summary>What reporting do we actually get?<span class="qa__mark" aria-hidden="true"></span></summary>
+        <p>Impressions, unique opens, clicks, referrer breakdown and directory page visits, in a shared dashboard the morning after each send. Raw logs are available on request.</p>
+      </details>
+      <details class="qa">
+        <summary>Will our ad run next to a competitor?<span class="qa__mark" aria-hidden="true"></span></summary>
+        <p>Not in the same issue. Newsletter features are one per send and banner blocks cap at three advertisers with no category overlap.</p>
+      </details>
+      <details class="qa">
+        <summary>Can you write the creative for us?<span class="qa__mark" aria-hidden="true"></span></summary>
+        <p>Included on featured listings and sponsorships. Our editor drafts it from a call and your site, and nothing ships until you approve the exact wording.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLOSING CTA + FOOTER ============ -->
+<section class="close" id="contact">
+  <div class="close__schematic" aria-hidden="true">
+    <svg viewBox="0 0 1200 300" preserveAspectRatio="none" fill="none" stroke="#A78BFA">
+      <path d="M0 240h360l60-70h240l60 70h480" stroke-opacity=".28"/>
+      <path d="M0 268h1200" stroke-opacity=".12" stroke-dasharray="2 6"/>
+      <circle cx="420" cy="170" r="3.5" fill="#C4B5FD" stroke="none"/>
+      <circle cx="660" cy="170" r="3.5" fill="#C4B5FD" stroke="none"/>
+    </svg>
+  </div>
+  <div class="wrap close__inner reveal">
+    <h2 class="close__h2">Tell us who you need in the room.</h2>
+    <p class="close__sub">Send the company and the stage. We will reply with the lists that fit, the ones that do not, and the next open date.</p>
+    <div class="close__actions">
+      <a class="btn btn--primary btn--lg" href="mailto:hello@wavelength.ad?subject=Placement%20enquiry">Get featured <i class="ph ph-arrow-up-right" aria-hidden="true"></i></a>
+      <a class="link" href="mailto:hello@wavelength.ad">hello@wavelength.ad</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap footer__grid">
+    <div class="footer__brand">
+      <a class="nav__brand" href="#top" aria-label="Wavelength home">
+        <svg class="nav__mark" viewBox="0 0 28 28" aria-hidden="true">
+          <rect x="1" y="1" width="26" height="26" rx="7" fill="none" stroke="currentColor" stroke-width="1.2" opacity=".45"/>
+          <path d="M6 14c2.4 0 2.4-6.2 4.7-6.2S13.1 20.2 15.5 20.2 17.9 14 20.3 14H22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        <span>Wavelength</span>
+      </a>
+      <p class="footer__line">Ad placements for startups that need the right readers, not more of them.</p>
+    </div>
+    <nav class="footer__col" aria-label="Placements">
+      <h3>Placements</h3>
+      <a href="#placements">Newsletter feature</a>
+      <a href="#placements">Directory listing</a>
+      <a href="#placements">Site banner</a>
+      <a href="#placements">Event sponsorship</a>
+    </nav>
+    <nav class="footer__col" aria-label="Company">
+      <h3>Company</h3>
+      <a href="#audience">Audience data</a>
+      <a href="#pricing">Rate card</a>
+      <a href="#faq">FAQ</a>
+      <a href="mailto:press@wavelength.ad">Press</a>
+    </nav>
+    <div class="footer__col">
+      <h3>Contact</h3>
+      <a href="mailto:hello@wavelength.ad">hello@wavelength.ad</a>
+      <a href="tel:+13128471928">+1 (312) 847-1928</a>
+      <a class="btn btn--primary btn--sm footer__cta" href="#contact">Get featured</a>
+    </div>
+  </div>
+  <div class="wrap footer__base">
+    <span>&copy; 2026 Wavelength Media</span>
+    <span><a href="#top">Privacy</a> <a href="#top">Terms</a></span>
+  </div>
+</footer>
+
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>

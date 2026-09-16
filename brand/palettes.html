@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wavelength palette board</title>
+<meta name="color-scheme" content="dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&family=Inter+Tight:wght@400;500&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box}
+  body{margin:0;background:#06040c;color:#f6f3ff;font-family:"Inter Tight",system-ui,sans-serif;line-height:1.6}
+  .wrap{width:min(100% - 40px,1180px);margin-inline:auto}
+  header{padding:4rem 0 2.5rem}
+  h1{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:clamp(1.8rem,1.2rem+2vw,2.8rem);letter-spacing:-.03em;margin:0 0 .8rem}
+  .sub{color:#a197bc;max-width:62ch;margin:0}
+  .note{margin-top:1.4rem;padding:1rem 1.2rem;border:1px solid #2e2044;border-radius:12px;color:#a197bc;font-size:.92rem;max-width:70ch}
+
+  .opt{padding:3rem 0;border-top:1px solid #241938}
+  .opt__head{display:flex;flex-wrap:wrap;gap:.8rem 1.4rem;align-items:baseline;margin-bottom:.6rem}
+  .opt__name{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:1.5rem;letter-spacing:-.02em;margin:0}
+  .tag{font-family:"IBM Plex Mono",monospace;font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;padding:.25rem .6rem;border-radius:6px;background:#7c3aed;color:#fff}
+  .opt__why{color:#a197bc;max-width:64ch;margin:0 0 2rem}
+
+  .swatches{display:grid;grid-template-columns:repeat(auto-fit,minmax(128px,1fr));gap:.6rem;margin-bottom:1.6rem}
+  .sw{border-radius:10px;border:1px solid rgba(255,255,255,.1);padding:.8rem;min-height:104px;display:flex;flex-direction:column;justify-content:flex-end;gap:.15rem}
+  .sw b{font-size:.78rem;font-weight:500}
+  .sw code{font-family:"IBM Plex Mono",monospace;font-size:.68rem;opacity:.72}
+
+  /* live preview of each palette on a real UI fragment */
+  .demo{border-radius:14px;border:1px solid var(--d-line);background:var(--d-ground);padding:2.2rem 2rem;display:grid;gap:1.6rem}
+  @media(min-width:820px){.demo{grid-template-columns:1.25fr .75fr;align-items:center}}
+  .demo h2{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:clamp(1.5rem,1.1rem+1.4vw,2.1rem);line-height:1.08;letter-spacing:-.03em;margin:0 0 .7rem;color:var(--d-text)}
+  .demo p{margin:0 0 1.3rem;color:var(--d-mute);font-size:.95rem;max-width:44ch}
+  .demo .row{display:flex;flex-wrap:wrap;gap:.7rem}
+  .b1{padding:.65rem 1.2rem;border-radius:10px;border:1px solid var(--d-accent2);background:var(--d-accent);color:#fff;font-weight:500;font-size:.92rem}
+  .b2{padding:.65rem 1.2rem;border-radius:10px;border:1px solid var(--d-line);background:transparent;color:var(--d-text);font-weight:500;font-size:.92rem}
+  .panel{border-radius:12px;border:1px solid var(--d-line);background:var(--d-surface);padding:1.3rem}
+  .panel .k{font-family:"IBM Plex Mono",monospace;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--d-mute);display:block;margin-bottom:.9rem}
+  .bars{display:grid;grid-template-columns:repeat(4,1fr);gap:.55rem;align-items:end;height:92px}
+  .bars i{display:block;background:var(--d-accent);border:1px solid var(--d-accent2);border-bottom:none;border-radius:5px 5px 0 0}
+  .panel .fig{font-family:"IBM Plex Mono",monospace;font-size:1.5rem;color:var(--d-text);margin-top:1rem;display:block}
+  .panel .cap{font-size:.76rem;color:var(--d-mute)}
+
+  footer{padding:3rem 0 5rem;border-top:1px solid #241938;color:#8a80a6;font-size:.88rem}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <h1>Palette board</h1>
+  <p class="sub">Three directions for Wavelength, shown on the same UI fragment so the comparison is fair. Look at these full screen, in a dark room, on the screen you actually use. Colour on a dark ground behaves nothing like colour in a spec table.</p>
+  <p class="note"><b>Before you vote:</b> name the emotion you want first, then pick the palette that produces it. Reasoning for each option is in <code>03-visual-direction.md</code>.</p>
+</header>
+
+<!-- A -->
+<section class="opt wrap">
+  <div class="opt__head"><h2 class="opt__name">A. Deep Signal</h2><span class="tag">On the site now</span></div>
+  <p class="opt__why">Instrumentation. A screen that is measuring something. Highest energy of the three, and the one most at risk of reading as a default tech-startup palette if the accent is ever allowed to multiply.</p>
+  <div class="swatches">
+    <div class="sw" style="background:#06040c"><b>Ground</b><code>#06040C</code></div>
+    <div class="sw" style="background:#110b1d"><b>Surface</b><code>#110B1D</code></div>
+    <div class="sw" style="background:#2e2044"><b>Line</b><code>#2E2044</code></div>
+    <div class="sw" style="background:#7c3aed"><b>Accent</b><code>#7C3AED</code></div>
+    <div class="sw" style="background:#9b6bff"><b>Accent bright</b><code>#9B6BFF</code></div>
+    <div class="sw" style="background:#c4b5fd;color:#110b1d"><b>Accent text</b><code>#C4B5FD</code></div>
+    <div class="sw" style="background:#f6f3ff;color:#06040c"><b>Text</b><code>#F6F3FF</code></div>
+    <div class="sw" style="background:#a197bc;color:#06040c"><b>Muted</b><code>#A197BC</code></div>
+  </div>
+  <div class="demo" style="--d-ground:#06040c;--d-surface:#110b1d;--d-line:#2e2044;--d-accent:#7c3aed;--d-accent2:#9b6bff;--d-text:#f6f3ff;--d-mute:#a197bc">
+    <div>
+      <h2>Put your startup where investors already look.</h2>
+      <p>We place startups inside the newsletters, directories and events that founders and early-stage investors actually read.</p>
+      <div class="row"><span class="b1">Get featured</span><span class="b2">See placements</span></div>
+    </div>
+    <div class="panel"><span class="k">Reader composition</span>
+      <div class="bars"><i style="height:95%"></i><i style="height:65%"></i><i style="height:55%"></i><i style="height:35%"></i></div>
+      <span class="fig">184,200</span><span class="cap">monthly readers</span>
+    </div>
+  </div>
+</section>
+
+<!-- B -->
+<section class="opt wrap">
+  <div class="opt__head"><h2 class="opt__name">B. Ultraviolet and Bone</h2></div>
+  <p class="opt__why">Print, not dashboard. The warm white against a deeper, less electric purple reads as considered and slightly expensive. Dodges the AI-purple association almost entirely, but gives up the live-instrument feeling the hero is built on.</p>
+  <div class="swatches">
+    <div class="sw" style="background:#0b0810"><b>Ground</b><code>#0B0810</code></div>
+    <div class="sw" style="background:#171220"><b>Surface</b><code>#171220</code></div>
+    <div class="sw" style="background:#342a42"><b>Line</b><code>#342A42</code></div>
+    <div class="sw" style="background:#6b21a8"><b>Accent</b><code>#6B21A8</code></div>
+    <div class="sw" style="background:#a855f7"><b>Accent bright</b><code>#A855F7</code></div>
+    <div class="sw" style="background:#d8c9f0;color:#171220"><b>Accent text</b><code>#D8C9F0</code></div>
+    <div class="sw" style="background:#f4efe6;color:#0b0810"><b>Text</b><code>#F4EFE6</code></div>
+    <div class="sw" style="background:#a89f96;color:#0b0810"><b>Muted</b><code>#A89F96</code></div>
+  </div>
+  <div class="demo" style="--d-ground:#0b0810;--d-surface:#171220;--d-line:#342a42;--d-accent:#6b21a8;--d-accent2:#a855f7;--d-text:#f4efe6;--d-mute:#a89f96">
+    <div>
+      <h2>Put your startup where investors already look.</h2>
+      <p>We place startups inside the newsletters, directories and events that founders and early-stage investors actually read.</p>
+      <div class="row"><span class="b1">Get featured</span><span class="b2">See placements</span></div>
+    </div>
+    <div class="panel"><span class="k">Reader composition</span>
+      <div class="bars"><i style="height:95%"></i><i style="height:65%"></i><i style="height:55%"></i><i style="height:35%"></i></div>
+      <span class="fig">184,200</span><span class="cap">monthly readers</span>
+    </div>
+  </div>
+</section>
+
+<!-- C -->
+<section class="opt wrap">
+  <div class="opt__head"><h2 class="opt__name">C. Indigo Instrument</h2></div>
+  <p class="opt__why">Infrastructure. Indigo is the colour of things that handle money, so it buys the credibility violet has to earn. Also the safest of the three: a strong second choice and a weak first one, unless trust turns out to be the main objection.</p>
+  <div class="swatches">
+    <div class="sw" style="background:#05070f"><b>Ground</b><code>#05070F</code></div>
+    <div class="sw" style="background:#0e1424"><b>Surface</b><code>#0E1424</code></div>
+    <div class="sw" style="background:#23304d"><b>Line</b><code>#23304D</code></div>
+    <div class="sw" style="background:#4f46e5"><b>Accent</b><code>#4F46E5</code></div>
+    <div class="sw" style="background:#818cf8"><b>Accent bright</b><code>#818CF8</code></div>
+    <div class="sw" style="background:#c7d2fe;color:#0e1424"><b>Accent text</b><code>#C7D2FE</code></div>
+    <div class="sw" style="background:#f2f5ff;color:#05070f"><b>Text</b><code>#F2F5FF</code></div>
+    <div class="sw" style="background:#96a0bd;color:#05070f"><b>Muted</b><code>#96A0BD</code></div>
+  </div>
+  <div class="demo" style="--d-ground:#05070f;--d-surface:#0e1424;--d-line:#23304d;--d-accent:#4f46e5;--d-accent2:#818cf8;--d-text:#f2f5ff;--d-mute:#96a0bd">
+    <div>
+      <h2>Put your startup where investors already look.</h2>
+      <p>We place startups inside the newsletters, directories and events that founders and early-stage investors actually read.</p>
+      <div class="row"><span class="b1">Get featured</span><span class="b2">See placements</span></div>
+    </div>
+    <div class="panel"><span class="k">Reader composition</span>
+      <div class="bars"><i style="height:95%"></i><i style="height:65%"></i><i style="height:55%"></i><i style="height:35%"></i></div>
+      <span class="fig">184,200</span><span class="cap">monthly readers</span>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">
+  To try a palette on the real page, replace the ground, surface, line, accent and text values in <code>:root</code> at the top of <code>assets/css/styles.css</code>. Every colour on the site is a token, so one edit swaps the whole page. The figures shown here are placeholders.
+</footer>
+
+</body>
+</html>
