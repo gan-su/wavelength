@@ -108,9 +108,36 @@ body{
   will-change:transform;
 }
 /* fixed-width slots keep the wordmark from jittering while glyphs cycle */
-.ltr{display:inline-block; width:.74em; text-align:center; opacity:0}
+.slot{display:inline-block; overflow:hidden; line-height:1.12}
+.ltr{display:block; width:.74em; text-align:center; opacity:0}
 .ltr.is-on{opacity:1}
 .ltr.is-cycling{color:var(--v-400)}
+
+/* ---- variant B: quiet. Letters rise behind their own mask, nothing
+   flickers, and the panel lifts as one piece instead of splitting. ---- */
+.intro[data-variant="b"] .ltr{opacity:1; transform:translateY(112%)}
+.intro[data-variant="b"] .ltr.is-on{transform:translateY(0); transition:transform .95s cubic-bezier(.16,1,.3,1)}
+.intro[data-variant="b"] .ltr.is-up{transform:translateY(-112%); transition:transform .8s cubic-bezier(.76,0,.24,1)}
+.intro[data-variant="b"] .curtain{height:100.5%; box-shadow:none; border:0}
+.intro[data-variant="b"] .curtain--b{display:none}
+.intro[data-variant="b"] .curtain--t{top:0; background:#0b0815}
+.intro[data-variant="b"].is-out .curtain--t{transform:translateY(-100%); transition:transform .95s cubic-bezier(.76,0,.24,1) .18s}
+.intro[data-variant="b"] .rule{background:linear-gradient(90deg,transparent,var(--line),transparent)}
+
+.vswitch{
+  position:fixed; left:calc(18px + env(safe-area-inset-left,0px));
+  bottom:calc(18px + env(safe-area-inset-bottom,0px)); z-index:40;
+  display:flex; gap:2px; padding:3px; border-radius:999px;
+  background:color-mix(in srgb,var(--panel) 88%,transparent);
+  border:1px solid var(--line); opacity:0; transition:opacity .4s var(--ease);
+}
+.vswitch.is-on{opacity:1}
+.vswitch button{
+  font-family:var(--f-m); font-size:.63rem; letter-spacing:.14em;
+  padding:.5rem .8rem; border-radius:999px; border:0; cursor:pointer;
+  background:transparent; color:var(--mute-2);
+}
+.vswitch button[aria-pressed="true"]{background:var(--v-500); color:#fff}
 
 .meter{
   position:absolute; left:0; right:0; bottom:clamp(1.6rem,5vh,3rem);
@@ -177,10 +204,14 @@ body{
   </main>
 </div>
 
+<div class="vswitch" id="vswitch" role="group" aria-label="Intro variant">
+  <button type="button" data-v="a" aria-pressed="true">A / GENERATE</button>
+  <button type="button" data-v="b" aria-pressed="false">B / RISE</button>
+</div>
 <button class="replay" id="replay" type="button">Replay intro</button>
 
 <!-- ============ opening sequence ============ -->
-<div class="intro" id="intro" aria-hidden="true">
+<div class="intro" id="intro" data-variant="a" aria-hidden="true">
   <div class="curtain curtain--t"></div>
   <div class="curtain curtain--b"></div>
   <div class="stage">
@@ -204,32 +235,49 @@ body{
   var site    = document.getElementById('site');
   var barMark = document.getElementById('barMark');
   var replay  = document.getElementById('replay');
+  var vswitch = document.getElementById('vswitch');
+  var meter   = intro.querySelector('.meter span');
 
+  /* each letter sits in its own mask, so variant B can rise it from below
+     while variant A just fades it in and cycles glyphs */
   var slots = NAME.split('').map(function(ch){
+    var mask = document.createElement('span');
+    mask.className = 'slot';
     var s = document.createElement('span');
     s.className = 'ltr';
     s.textContent = ch;
     s.dataset.final = ch;
-    word.appendChild(s);
+    mask.appendChild(s);
+    word.appendChild(mask);
     return s;
   });
 
-  /* one place to track every pending callback, so a replay mid-flight
-     cannot leave an old timer running over the new sequence */
   var timeouts = [], intervals = [], raf = null;
   function after(fn, ms){ timeouts.push(setTimeout(fn, ms)); }
   function stopAll(){
-    timeouts.forEach(clearTimeout);  timeouts  = [];
+    timeouts.forEach(clearTimeout);   timeouts  = [];
     intervals.forEach(clearInterval); intervals = [];
     if (raf) cancelAnimationFrame(raf);
     raf = null;
+  }
+
+  /* A resolves out of noise; B rises out of a mask. Both land at ~1.7s so the
+     counter, which runs off SETTLED, stays truthful in either variant. */
+  var SPEC = {
+    a: { start: 420, step: 165, cycle: 460, tick: 45, hold: 340, exit: 900, label: 'GENERATING' },
+    b: { start: 300, step:  85, rise:  950,            hold: 300, exit: 1200, label: 'SERFIS' }
+  };
+  function variant(){ return intro.dataset.variant === 'b' ? 'b' : 'a'; }
+  function settled(v){
+    var s = SPEC[v];
+    return s.start + (NAME.length - 1) * s.step + (v === 'a' ? s.cycle : s.rise);
   }
 
   function finish(){
     stopAll();
     slots.forEach(function(s){
       s.textContent = s.dataset.final;
-      s.classList.remove('is-cycling');
+      s.classList.remove('is-cycling', 'is-up');
       s.classList.add('is-on');
     });
     intro.hidden = true;
@@ -238,10 +286,11 @@ body{
     site.classList.add('is-live');
     barMark.classList.add('is-on');
     replay.classList.add('is-on');
+    vswitch.classList.add('is-on');
   }
 
-  /* FLIP: measure where the header wordmark sits, then carry the big one
-     to exactly that spot. The brand lands in place instead of cross-fading. */
+  /* FLIP, variant A only: measure where the header wordmark sits and carry the
+     full-size one to exactly that spot, so the brand lands rather than fades. */
   function flyToHeader(){
     var from = word.getBoundingClientRect();
     var to   = barMark.getBoundingClientRect();
@@ -254,11 +303,10 @@ body{
     after(function(){ barMark.classList.add('is-on'); }, 620);
   }
 
-  var START = 420, STEP = 165, CYCLE = 460, TICK = 45;
-  var SETTLED = START + (NAME.length - 1) * STEP + CYCLE;   /* ~1705ms */
-
   function run(){
     stopAll();
+
+    var v = variant(), spec = SPEC[v], SETTLED = settled(v);
 
     intro.hidden = false;
     intro.classList.remove('is-out', 'is-ruled');
@@ -267,22 +315,24 @@ body{
     site.classList.remove('is-live');
     barMark.classList.remove('is-on');
     replay.classList.remove('is-on');
+    vswitch.classList.remove('is-on');
     slots.forEach(function(s){
-      s.classList.remove('is-on', 'is-cycling');
+      s.classList.remove('is-on', 'is-cycling', 'is-up');
       s.textContent = s.dataset.final;
     });
     pct.textContent = '000';
+    meter.textContent = spec.label;
 
     if (reduced.matches){ finish(); return; }
 
     after(function(){ intro.classList.add('is-ruled'); }, 180);
 
-    /* Each letter cycles glyphs before locking, staggered left to right:
-       the name resolves the way generated output does, piece by piece. */
     slots.forEach(function(s, i){
       after(function(){
-        s.classList.add('is-on', 'is-cycling');
-        var left = Math.round(CYCLE / TICK);
+        s.classList.add('is-on');
+        if (v !== 'a') return;
+        s.classList.add('is-cycling');
+        var left = Math.round(spec.cycle / spec.tick);
         var id = setInterval(function(){
           if (left-- <= 0){
             clearInterval(id);
@@ -291,9 +341,9 @@ body{
             return;
           }
           s.textContent = GLYPHS.charAt((Math.random() * GLYPHS.length) | 0);
-        }, TICK);
+        }, spec.tick);
         intervals.push(id);
-      }, START + i * STEP);
+      }, spec.start + i * spec.step);
     });
 
     var t0 = null;
@@ -307,14 +357,30 @@ body{
 
     after(function(){
       intro.classList.add('is-out');
-      flyToHeader();
+      if (v === 'a'){
+        flyToHeader();
+      } else {
+        /* B: the name leaves the way it arrived, back behind its mask */
+        slots.forEach(function(s, i){ after(function(){ s.classList.add('is-up'); }, i * 45); });
+        after(function(){ barMark.classList.add('is-on'); }, 700);
+      }
       site.classList.add('is-live');
-    }, SETTLED + 340);
+    }, SETTLED + spec.hold);
 
-    after(finish, SETTLED + 340 + 900);
+    after(finish, SETTLED + spec.hold + spec.exit);
   }
 
   replay.addEventListener('click', run);
+
+  vswitch.addEventListener('click', function(e){
+    var btn = e.target.closest('button[data-v]');
+    if (!btn) return;
+    intro.dataset.variant = btn.dataset.v;
+    vswitch.querySelectorAll('button').forEach(function(b){
+      b.setAttribute('aria-pressed', String(b === btn));
+    });
+    run();
+  });
 
   /* an opening sequence should never hold someone hostage */
   ['pointerdown', 'keydown', 'wheel'].forEach(function(evt){
