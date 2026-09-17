@@ -135,6 +135,7 @@ body{
 .intro[data-variant="c"] .stage,
 .intro[data-variant="c"] .creveal{clip-path:inset(0 calc(100% - var(--p,0%)) 0 0)}
 .intro[data-variant="c"] .ltr{opacity:1; transform:none}
+.intro[data-variant="c"] .stage{place-items:center; padding-bottom:16vh}
 .intro[data-variant="c"].is-out{background:transparent}
 .intro[data-variant="c"].is-out .creveal{opacity:0; transition:opacity .55s var(--ease)}
 .intro[data-variant="c"].is-out .head{opacity:0; transition:opacity .3s linear}
@@ -148,17 +149,50 @@ body{
 }
 .head{
   display:none; position:absolute; top:0; bottom:0; left:var(--p,0%);
-  width:2px; margin-left:-1px; align-items:center; justify-content:center;
-  background:linear-gradient(180deg,transparent,var(--v-400) 18%,var(--v-400) 82%,transparent);
-  box-shadow:0 0 30px 3px color-mix(in srgb,var(--v-500) 70%,transparent);
+  width:1px; margin-left:-1px;
+  background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--v-400) 75%,transparent) 12%,color-mix(in srgb,var(--v-400) 75%,transparent) 88%,transparent);
+  box-shadow:0 0 22px 1px color-mix(in srgb,var(--v-600) 55%,transparent);
 }
-.head__mark{
-  position:absolute; width:46px; height:46px; border-radius:12px;
-  display:grid; place-items:center; color:var(--v-300);
-  background:#120c20; border:1px solid var(--v-500);
-  box-shadow:0 0 26px color-mix(in srgb,var(--v-600) 75%,transparent);
+/* Original walking figure. Filled torso and chunky tapered limbs so she reads
+   as a person rather than a wire stick. Two-joint legs: each leg group rotates
+   at the hip, its nested shin rotates at the knee. */
+.walker{
+  position:absolute; left:0; bottom:5%;
+  height:clamp(240px,54vh,470px); width:auto; overflow:visible;
+  transform:translateX(-40%);
+  color:var(--white);
+  /* she crosses the wordmark, and white-on-white merges without an edge */
+  filter:drop-shadow(0 0 4px var(--void)) drop-shadow(0 0 14px rgba(6,4,12,.95));
 }
-.head__mark svg{width:24px; height:24px}
+.walker g{transform-box:view-box}
+.walker .limb{fill:none; stroke:currentColor; stroke-width:15; stroke-linecap:round}
+.walker .limb.thin{stroke-width:12.5}
+.walker .foot{fill:none; stroke:currentColor; stroke-width:11; stroke-linecap:round}
+.walker .neck{fill:none; stroke:currentColor; stroke-width:11; stroke-linecap:round}
+.walker .torso{fill:currentColor; stroke:currentColor; stroke-width:7; stroke-linejoin:round}
+.walker .head-c{fill:currentColor; stroke:none}
+.walker .hair{fill:none; stroke:currentColor; stroke-width:9; stroke-linecap:round}
+.walker .far{opacity:.5}
+
+.walker__body{animation:bob .62s ease-in-out infinite; transform-box:view-box; transform-origin:60px 126px}
+.leg--back {transform-origin:58px 126px; animation:hipBack  .62s linear infinite}
+.leg--front{transform-origin:64px 126px; animation:hipFront .62s linear infinite}
+.leg--back  .shin{transform-origin:36px 168px; animation:kneeBack  .62s linear infinite}
+.leg--front .shin{transform-origin:82px 170px; animation:kneeFront .62s linear infinite}
+.arm--far{transform-origin:66px 74px; animation:brace .62s ease-in-out infinite}
+.arm--near{transform-origin:74px 68px; animation:braceNear .62s ease-in-out infinite}
+
+@keyframes bob      {0%,100%{transform:translateY(0)}   50%{transform:translateY(-5px)}}
+@keyframes hipBack  {0%{transform:rotate(24deg)}  50%{transform:rotate(-22deg)} 100%{transform:rotate(24deg)}}
+@keyframes hipFront {0%{transform:rotate(-22deg)} 50%{transform:rotate(24deg)}  100%{transform:rotate(-22deg)}}
+@keyframes kneeBack {0%{transform:rotate(3deg)}   30%{transform:rotate(38deg)}  60%{transform:rotate(9deg)}  100%{transform:rotate(3deg)}}
+@keyframes kneeFront{0%{transform:rotate(30deg)}  30%{transform:rotate(4deg)}   60%{transform:rotate(36deg)} 100%{transform:rotate(30deg)}}
+@keyframes brace    {0%,100%{transform:rotate(1.5deg)}  50%{transform:rotate(-2.5deg)}}
+@keyframes braceNear{0%,100%{transform:rotate(-2deg)}   50%{transform:rotate(2deg)}}
+
+@media (prefers-reduced-motion:reduce){
+  .walker__body,.leg--back,.leg--front,.shin,.arm--far,.arm--near{animation:none!important}
+}
 
 .vswitch{
   position:fixed; left:calc(18px + env(safe-area-inset-left,0px));
@@ -256,7 +290,30 @@ body{
     <span class="rule"></span>
     <div class="word" id="word"></div>
   </div>
-  <div class="head"><span class="head__mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 15.5c1.8 1.4 7.2 1.4 9-1 1.2-1.6-.6-3-3-3.4-2.4-.4-4.2-1-3.4-2.6.8-1.6 5-1.8 6.6-.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span></div>
+  <div class="head">
+    <svg class="walker" viewBox="0 0 150 225" aria-hidden="true">
+      <g class="walker__body">
+        <!-- far side limbs sit behind the torso and read dimmer, so the two
+             arms and two legs stay legible instead of merging into one shape -->
+        <g class="leg leg--back far">
+          <path class="limb" d="M58 126 L36 168"/>
+          <g class="shin"><path class="limb" d="M36 168 L28 202"/><path class="foot" d="M28 203 L11 207"/></g>
+        </g>
+        <g class="arm arm--far far"><path class="limb thin" d="M66 74 L98 82"/><path class="limb thin" d="M98 82 L120 72"/></g>
+
+        <path class="torso" d="M60 60 L88 65 L74 128 L48 124 Z"/>
+        <path class="neck" d="M75 56 L71 66"/>
+        <circle class="head-c" cx="80" cy="38" r="17"/>
+        <path class="hair" d="M63 36a17 17 0 0 1 25-13"/>
+
+        <g class="leg leg--front">
+          <path class="limb" d="M64 126 L82 170"/>
+          <g class="shin"><path class="limb" d="M82 170 L78 204"/><path class="foot" d="M78 205 L96 209"/></g>
+        </g>
+        <g class="arm arm--near"><path class="limb thin" d="M74 68 L106 76"/><path class="limb thin" d="M106 76 L128 64"/></g>
+      </g>
+    </svg>
+  </div>
   <div class="meter"><span>GENERATING</span><b id="pct">000</b></div>
 </div>
 
@@ -276,7 +333,7 @@ body{
   var replay   = document.getElementById('replay');
   var vswitch  = document.getElementById('vswitch');
   var meter    = intro.querySelector('.meter span');
-  var headMark = intro.querySelector('.head__mark');
+  var headMark = null;
 
   var slots = NAME.split('').map(function(ch){
     var mask = document.createElement('span');
