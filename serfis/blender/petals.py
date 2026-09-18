@@ -42,7 +42,7 @@ def clear_scene():
             block.remove(item)
 
 
-def build_petal(name="Petal", length=1.0, width=0.62, curl=0.34, cup=0.55):
+def build_petal(name="Petal", length=1.0, width=0.78, curl=0.30, cup=0.62):
     """A petal as a deformed grid.
 
     v runs base(0) -> tip(1). The width profile is a sine raised to a power, so the
@@ -59,7 +59,9 @@ def build_petal(name="Petal", length=1.0, width=0.62, curl=0.34, cup=0.55):
     grid = {}
     for iv in range(SEGMENTS + 1):
         v = iv / SEGMENTS
-        profile = math.sin(math.pi * min(v, 0.999) ** 0.86) ** 0.72
+        # Rose profile, matching the shape chosen on the studies canvas: widest
+        # about two thirds of the way up, narrow where it would attach.
+        profile = math.sin(math.pi * min(v, 0.999) ** 1.9) ** 0.62
         for iu in range(SEGMENTS + 1):
             u = iu / SEGMENTS
             x = (u - 0.5) * width * profile
